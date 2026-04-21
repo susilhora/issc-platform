@@ -4,10 +4,10 @@
   "description": "ISSC AI Consultancy Platform",
   "main": "scraper/index.js",
   "scripts": {
-    "start": "node scraper/index.js",
+    "start": "next start",
     "dev": "next dev",
     "build": "prisma generate && next build",
-    "next-start": "next start"
+    "scrape": "node scraper/index.js"
   },
   "dependencies": {
     "@prisma/client": "^5.0.0",
