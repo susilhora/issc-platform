@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 
 type University = {
-  id: string;
+  id: number;
   name: string;
   city: string | null;
   country: { name: string; costEstimates: { tuitionMin: number | null }[] };

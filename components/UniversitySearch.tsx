@@ -3,7 +3,7 @@
 import { useState } from 'react';
 
 type University = {
-  id: string;
+  id: number;
   name: string;
   city: string | null;
   country: { name: string; costEstimates: { tuitionMin: number | null }[] };

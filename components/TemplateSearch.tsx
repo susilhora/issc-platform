@@ -3,7 +3,7 @@
 import { useState } from 'react';
 
 type Template = {
-  id: string;
+  id: number;
   title: string;
   content: string;
   category: string | null;
