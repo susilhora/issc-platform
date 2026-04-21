@@ -1,0 +1,14 @@
+@import "tailwindcss";
+
+:root {
+  --primary-green: #2D5A27;
+  --accent-yellow: #FDB813;
+  --text-main: #333333;
+  --bg-light: #F9FAFB;
+}
+
+body {
+  background-color: var(--bg-light);
+  color: var(--text-main);
+  font-family: 'Inter', sans-serif;
+}

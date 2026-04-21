@@ -1,0 +1,62 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Country {
+  id            Int             @id @default(autoincrement())
+  name          String
+  slug          String          @unique
+  description   String?
+  universities  University[]
+  costEstimates CostEstimate[]
+  visaRoadmaps  VisaRoadmap[]
+  scholarships  Scholarship[]
+}
+
+model University {
+  id        Int     @id @default(autoincrement())
+  name      String
+  city      String?
+  countryId Int
+  country   Country @relation(fields: [countryId], references: [id])
+}
+
+model CostEstimate {
+  id         Int     @id @default(autoincrement())
+  tuitionMin Float?
+  tuitionMax Float?
+  livingCost Float?
+  countryId  Int
+  country    Country @relation(fields: [countryId], references: [id])
+}
+
+model VisaRoadmap {
+  id            Int     @id @default(autoincrement())
+  stepNumber    Int
+  title         String
+  description   String?
+  is_expert_tip Boolean @default(false)
+  countryId     Int
+  country       Country @relation(fields: [countryId], references: [id])
+}
+
+model Scholarship {
+  id          Int     @id @default(autoincrement())
+  name        String
+  amount      String?
+  description String?
+  countryId   Int
+  country     Country @relation(fields: [countryId], references: [id])
+}
+
+model DocumentTemplate {
+  id       Int     @id @default(autoincrement())
+  title    String
+  content  String
+  category String?
+}
