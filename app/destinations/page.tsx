@@ -1,11 +1,16 @@
 import { PrismaClient } from '@prisma/client';
 import Link from 'next/link';
+import UniversitySearch from '../../components/UniversitySearch';
 
 const prisma = new PrismaClient();
 
 export default async function DestinationsIndex() {
   const countries = await prisma.country.findMany({
     include: { costEstimates: true },
+  });
+
+  const universities = await prisma.university.findMany({
+    include: { country: { include: { costEstimates: true } } }
   });
 
   return (
@@ -49,6 +54,8 @@ export default async function DestinationsIndex() {
             );
           })}
         </div>
+
+        <UniversitySearch universities={universities} />
       </div>
     </div>
   );

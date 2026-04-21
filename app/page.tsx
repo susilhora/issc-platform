@@ -1,13 +1,16 @@
 import { PrismaClient } from '@prisma/client';
 import Link from 'next/link';
+import AiMatchingEngine from '../components/AiMatchingEngine';
 
-// Instantiate PrismaClient
 const prisma = new PrismaClient();
 
 export default async function HomePage() {
   // Fetch actual data directly from SQLite
   const countries = await prisma.country.findMany({
     include: { costEstimates: true },
+  });
+  const universities = await prisma.university.findMany({
+    include: { country: { include: { costEstimates: true } } }
   });
 
   return (
@@ -28,6 +31,11 @@ export default async function HomePage() {
             Find Your Destination
           </Link>
         </div>
+      </section>
+
+      {/* AI Matching Engine */}
+      <section className="py-12 bg-gray-50 px-6">
+        <AiMatchingEngine universities={universities} />
       </section>
 
       {/* Destination Grid */}

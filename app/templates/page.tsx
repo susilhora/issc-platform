@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 import Link from "next/link";
+import TemplateSearch from '../../components/TemplateSearch';
 
 const prisma = new PrismaClient();
 
@@ -15,36 +16,7 @@ export default async function TemplatesHub() {
           <div className="h-1.5 w-24 bg-[var(--accent-yellow)] mx-auto mt-6 rounded-full"></div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {templates.map((template) => (
-            <div key={template.id} className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 hover:shadow-xl transition-shadow flex flex-col">
-              <div className="flex items-center mb-4">
-                <span className="text-3xl mr-4">📄</span>
-                <div>
-                  <h2 className="text-xl font-bold text-gray-900">{template.title}</h2>
-                  <span className="inline-block bg-green-100 text-[var(--primary-green)] text-xs px-3 py-1 rounded-full font-bold mt-2 uppercase tracking-wide">
-                    {template.category || 'General'}
-                  </span>
-                </div>
-              </div>
-              <div className="bg-gray-50 p-4 rounded-xl border border-gray-100 flex-grow mb-6 relative overflow-hidden">
-                <p className="text-gray-600 italic leading-relaxed">
-                  "{template.content.length > 150 ? template.content.substring(0, 150) + '...' : template.content}"
-                </p>
-                <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-gray-50 to-transparent"></div>
-              </div>
-              <button className="w-full text-center py-3 border-2 border-[var(--primary-green)] text-[var(--primary-green)] font-bold rounded-xl hover:bg-[var(--primary-green)] hover:text-white transition-all shadow-sm">
-                Read Full Template
-              </button>
-            </div>
-          ))}
-          
-          {templates.length === 0 && (
-            <div className="col-span-2 text-center p-12 bg-white rounded-2xl border border-dashed border-gray-300">
-              <p className="text-gray-500 italic">No templates available. Please upload Word documents via the Admin Portal.</p>
-            </div>
-          )}
-        </div>
+        <TemplateSearch templates={templates} />
       </div>
     </div>
   );
